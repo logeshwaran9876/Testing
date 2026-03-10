@@ -226,12 +226,8 @@ export class HCTpage {
 
 
 
+  0
 
-
-
-
-
-    // In your HCTpage constructor, update these locators:
 
     // Collaborators section
     this.collaboratorContainer = page.locator('app-search-employees .card.card-border-bg').first();

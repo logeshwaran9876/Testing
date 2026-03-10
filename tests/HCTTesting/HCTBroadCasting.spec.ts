@@ -2981,9 +2981,11 @@ test.describe('Country & State Filter Tests - All Roles', () => {
 test.describe('Fesitater Brodcasting to provider', () => {
   let loginPage: LoginPage;
   let enquiryPage: AdminEnquiryPage;
-  const TEST_CASE_ID = logindata.roles.facilitator.caseId;
-  const TEST_CASE_ID_2 = logindata.roles.facilitator.caseId;
-  const TEST_CASE_ID_3 = logindata.roles.facilitator.caseId;
+  const facilitatorRole = logindata.roles['facilitator' as keyof typeof logindata.roles];
+  const roleConfigTyped = (facilitatorRole || {}) as any;
+  const TEST_CASE_ID = roleConfigTyped?.caseId || 'CS1766';
+  const TEST_CASE_ID_2 = roleConfigTyped?.caseId || 'CS1766';
+  const TEST_CASE_ID_3 = roleConfigTyped?.caseId || 'CS1766';
   const STATUS_FILTER = 'Estimation Pending';
   const PROVIDER_NAME = 'Leo';
   const PROVIDER_NAME_2 = 'Leo';
@@ -2998,7 +3000,8 @@ test.describe('Fesitater Brodcasting to provider', () => {
     enquiryPage = new AdminEnquiryPage(page);
 
     // Get admin credentials from test data
-    const credentials = logindata.roles.facilitator;
+    const roleConfigTyped = (facilitatorRole || {}) as any;
+    const credentials = roleConfigTyped || { url: '', email: '', password: '' };
     const url = credentials.url;
 
     // Navigate to admin login page

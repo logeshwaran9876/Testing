@@ -166,6 +166,35 @@
         "filePaths": ["test-files/sample.pdf"]
       },
       "tags": ["@regular"]
+    },
+    "maternity": {
+      "scenarioName": "maternity case",
+      "patientName": "Dude Dude",
+      "caseId": "CS1540",
+      "memberId": "MR1540",
+      "estimationAmount": "1000000",
+      "treatmentPlan": "Regular treatment with all inclusive care",
+      "lengthOfStay": "5",
+      "inclusions": "All standard treatments including room, doctor fees, medicines",
+      "exclusions": "Cosmetic procedures",
+      "hospitalTerms": {
+        "hospitalPaymentCreditPeriod": "30",
+        "hospitalMarginPercentage": "15",
+        "hospitalAdvanceAmount": "500000",
+        "hospitalAdvanceAmountInAED": "22000",
+        "transactionType": "1",
+        "careeverServiceChargePercent": "5",
+        "facilitatorServiceChargePercent": "10",
+        "caseManagementFee": "25000",
+        "caseManagementFeeInAed": "1100",
+        "advanceAmountPayableToFacilitator": "100000",
+        "facilitatorAdvanceAmountInAED": "4400",
+        "facilitatorPaymentCreditPeriod": "15"
+      },
+      "attachments": {
+        "filePaths": ["test-files/sample.pdf"]
+      },
+      "tags": ["@regular"]
     }
   },
   "facilitatorFeeTypes": {

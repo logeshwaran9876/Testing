@@ -11,7 +11,15 @@ import {
 } from './testData';
 import { test_data } from "./../test-data/test.json"
 
-const ROLES = ['admin', 'insurance', 'provider', 'facilitator'] as const;
+const ROLES = [
+  'admin',
+  'crmTeamLead',
+  'hnmLead',
+  'caseManager',
+  'insurance',
+  'provider',
+  'facilitator'
+] as const;
 
 /**
  * Setup real website (no mocking)
