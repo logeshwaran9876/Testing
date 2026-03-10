@@ -1,0 +1,52 @@
+{
+  "enquiries": {
+    "valid": {
+      "basic": {
+        "firstName": "John",
+        "lastName": "Doe",
+        "gender": "Male",
+        "age": "35",
+        "country": "India",
+        "state": "Tamil Nadu",
+        "city": "Chennai",
+        "preferenceCountry": "India",
+        "preferenceState": "Tamil Nadu",
+        "preferenceCity": "Chennai",
+        "caseType": "Regular"
+      },
+      "complete": {
+        "firstName": "Jane",
+        "lastName": "Smith",
+        "gender": "Female",
+        "age": "28",
+        "email": "jane.smith@example.com",
+        "phone": "9876543210",
+        "country": "India",
+        "state": "Karnataka",
+        "city": "Bangalore",
+        "preferenceCountry": "India",
+        "preferenceState": "Karnataka",
+        "preferenceCity": "Bangalore",
+        "hospital": "City Hospital",
+        "treatment": "General Consultation",
+        "notes": "Test notes for enquiry",
+        "caseType": "Regular"
+      },
+      "maternity": {
+        "firstName": "Mary",
+        "lastName": "Johnson",
+        "gender": "Female",
+        "age": "30",
+        "country": "India",
+        "state": "Maharashtra",
+        "city": "Mumbai",
+        "preferenceCountry": "India",
+        "preferenceState": "Maharashtra",
+        "preferenceCity": "Mumbai",
+        "caseType": "Maternity",
+        "expectedDeliveryDate": "2024-12-25",
+        "pregnancyWeeks": "24"
+      }
+    }
+  }
+}

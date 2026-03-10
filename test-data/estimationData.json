@@ -1,0 +1,190 @@
+{
+  "credentials": {
+    "url": "http://newpro.dev.mycareever.com/auth/signin",
+    "email": "logeshvaran.9876@gmail.com",
+    "password": "Test@123"
+  },
+  "credentials1": {
+    "url": "http://newfec.dev.mycareever.com/auth/signin",
+    "email": "logeshvaran.9876@gmail.com",
+    "password": "Test@123"
+  },
+  "xpaths": {
+    "login": {
+      "emailInput": "//input[@name='email' or @placeholder='Email']",
+      "passwordInput": "//input[@name='password' or @type='password']",
+      "loginButton": "//button[contains(normalize-space(), 'Login') or contains(normalize-space(), 'Sign in')]"
+    },
+    "viewEnquiry": {
+      "viewEnquiryButton": "//button[normalize-space()='View enquiry']",
+      "searchInput": "//input[@placeholder='Search']",
+      "enquiryCardByName": "//div[contains(@class,'card-body')]//div[contains(normalize-space(),'Sathya')]",
+      "enquiryCardByCaseId": "//div[contains(@class,'card-body')]//div[normalize-space()='CS1734']",
+      "cardViewEditButton": "//div[contains(@class,'card-body')]//button[contains(normalize-space(), 'View & Edit') or contains(normalize-space(), 'View') and contains(normalize-space(), 'Edit')]"
+    },
+    "enquiryModal": {
+      "modalTitle": "//h5[contains(normalize-space(),'Enquiry & Estimations')]",
+      "estimationsTab": "//a[normalize-space()='Estimations']",
+      "patientDetailTab": "//a[normalize-space()='Patient detail']"
+    },
+    "newEstimation": {
+      "newEstimationButton": "//button[contains(normalize-space(), '+ New estimation')]",
+      "treatmentPlanInput": "//input[@name='lineOfTreatmentContent' or @id='lineOfTreatmentContent']",
+      "lengthOfStayInput": "//input[@name='lengthOfStay' or @id='lengthOfStay']",
+      "inclusionsInput": "//input[@name='ceInclusions' or @id='ceInclusions']",
+      "exclusionsInput": "//input[@name='ceExclusions' or @id='ceExclusions']",
+      "saveButton": "//app-provider-estimate-new//button[normalize-space()='Save']"
+    },
+    "estimationCard": {
+      "estimationCardContainer": "//div[contains(@class,'card-body')]//h5[contains(normalize-space(),'MR')]",
+      "viewEditButton": "//div[contains(@class,'card-body')]//button[normalize-space()='View & Edit']",
+      "viewButton": "//div[contains(@class,'card-body')]//button[normalize-space()='View Estimation']",
+      "newBadge": "//div[contains(@class,'badge')]//span[normalize-space()='New']",
+      "totalEstimationCost": "//div[contains(@class,'apply-job-package')]//h2",
+      "estimationDetails": "//div[contains(@class,'card-body')][contains(.,'MR')]"
+    },
+    "editEstimation": {
+
+       "estimationAmountInput": "(//table[contains(@class,'category-matrix')]//input[contains(@class,'text-right')])[1]",
+      "editEstimationTab": "//a[normalize-space()='Edit estimation']",
+      "editEstimationTabActive": "//a[normalize-space()='Edit estimation' and contains(@class,'active')]",
+      "saveAsDraftButton": "//button[normalize-space()='Save as draft']",
+      "hospitalTermsTab": "//a[normalize-space()='Hospital/Facilitator terms']",
+      "hospitalTermsTabActive": "//a[normalize-space()='Hospital/Facilitator terms' and contains(@class,'active')]",
+      "attachmentsTab": "//a[normalize-space()='Attachments']",
+      "attachmentsTabActive": "//a[normalize-space()='Attachments' and contains(@class,'active')]",
+      "patientCareTermsTab": "//a[normalize-space()='Patient care terms']"
+    },
+    "estimationMatrix": {
+      "table": "//table[contains(@class,'category-matrix')]",
+      "rows": "//table[contains(@class,'category-matrix')]/tbody/tr[not(contains(.,'Total'))]",
+      "totalRow": "//table[contains(@class,'category-matrix')]//tr[contains(.,'Total')]",
+      "columnTotals": "//table[contains(@class,'category-matrix')]//tr[contains(.,'Total')]/th[contains(@class,'text-right')]",
+      "particularInput": "(//table[contains(@class,'category-matrix')]/tbody/tr[%d]/td[1]//input)",
+      "amountInput": "(//table[contains(@class,'category-matrix')]/tbody/tr[%d]/td[%d]//input[contains(@class,'text-right')])",
+      "firstColumnTotal": "//table[contains(@class,'category-matrix')]//tr[contains(.,'Total')]/th[2]",
+      "secondColumnTotal": "//table[contains(@class,'category-matrix')]//tr[contains(.,'Total')]/th[3]",
+      "thirdColumnTotal": "//table[contains(@class,'category-matrix')]//tr[contains(.,'Total')]/th[4]"
+    },
+    "hospitalTerms": {
+      "hospitalPaymentCreditPeriod": "//input[@id='hospitalPaymentCreditPeriod' or @name='hospitalPaymentCreditPeriod']",
+      "hospitalMarginPercentage": "//input[@id='hospitalMarginPercentage' or @name='hospitalMarginPercentage']",
+      "hospitalAdvanceAmount": "//input[@id='hospitalAdvanceAmount' or @name='hospitalAdvanceAmount']",
+      "hospitalAdvanceAmountInAED": "//input[@id='hospitalAdvanceAmountinAED' or @name='hospitalAdvanceAmountinAED']",
+      "transactionType": "//select[@id='transactionType' or @formcontrolname='transactionTypeId']",
+      "careeverServiceChargePercent": "//input[@id='careeverServiceChargePercent' or @name='careeverServiceChargePercent']",
+      "facilitatorServiceChargePercent": "//input[@id='facilitatorServiceChargePercent' or @name='facilitatorServiceChargePercent']",
+      "caseManagementFee": "//input[@id='caseManagementFee' or @name='caseManagementFee']",
+      "caseManagementFeeInAed": "//input[@id='caseManagementFeeInAed' or @name='caseManagementFeeInAed']",
+      "advanceAmountPayableToFacilitator": "//input[@id='advanceAmountPayableToFacilitator' or @name='advanceAmountPayableToFacilitator']",
+      "facilitatorAdvanceAmountInAED": "//input[@id='facilitatorAdvanceAmountInAED' or @name='facilitatorAdvanceAmountInAED']",
+      "facilitatorPaymentCreditPeriod": "//input[@id='facilitatorPaymentCreditPeriod' or @name='facilitatorPaymentCreditPeriod']"
+    },
+    "patientCareTerms": {
+      "billForConsiderationAED": "//input[@id='billForConsiderationAED' or contains(@name,'billForConsideration')]",
+      "facilitatorFeeDisplay": "//div[contains(@class,'facilitator-fee') or contains(@class,'facilitator-calculation')]",
+      "finalFacilitatorFee": "//span[contains(@id,'finalFacilitatorFee') or contains(text(),'Facilitator Fee')]/following-sibling::span"
+    },
+    "attachments": {
+      "uploadArea": "//div[contains(@class,'upload') or contains(@class,'dropzone')]",
+      "fileInput": "//input[@type='file']",
+      "uploadedFileName": "//div[contains(@class,'file-name') or contains(@class,'attachment-name')]",
+      "addMoreButton": "//button[contains(normalize-space(),'Add more')]",
+      "deleteAttachment": "//i[contains(@class,'fa-trash') or contains(@class,'fa-times')]/.."
+    },
+    "successIndicators": {
+      "draftStatusBadge": "//div[contains(@class,'badge')]//span[contains(normalize-space(),'Draft')]",
+      "successMessage": "//div[contains(@class,'alert') or contains(@class,'toast')]//span[contains(normalize-space(),'saved') or contains(normalize-space(),'success')]"
+    }
+  },
+  "estimationMatrix": {
+    "testData": {
+      "row1": {
+        "particular": "Room Charges",
+        "column1": "100000",
+        "column2": "100000",
+        "column3": "100000"
+      },
+      "row2": {
+        "particular": "Doctor Fees",
+        "column1": "50000",
+        "column2": "50000",
+        "column3": "50000"
+      },
+      "row3": {
+        "particular": "Medicine Charges",
+        "column1": "30000",
+        "column2": "30000",
+        "column3": "30000"
+      },
+      "row4": {
+        "particular": "OT Charges",
+        "column1": "200000",
+        "column2": "100000",
+        "column3": "100000"
+      },
+      "row5": {
+        "particular": "ICU Charges",
+        "column1": "20000",
+        "column2": "20000",
+        "column3": "20000"
+      }
+    },
+    "expectedTotals": {
+      "column1": "400000",
+      "column2": "300000",
+      "column3": "300000",
+      "overallTotal": "1000000"
+    }
+  },
+  "cases": {
+    "regular": {
+      "scenarioName": "Regular case",
+      "patientName": "Dude Dude",
+      "caseId": "CS1540",
+      "memberId": "MR1540",
+      "estimationAmount": "1000000",
+      "treatmentPlan": "Regular treatment with all inclusive care",
+      "lengthOfStay": "5",
+      "inclusions": "All standard treatments including room, doctor fees, medicines",
+      "exclusions": "Cosmetic procedures",
+      "hospitalTerms": {
+        "hospitalPaymentCreditPeriod": "30",
+        "hospitalMarginPercentage": "15",
+        "hospitalAdvanceAmount": "500000",
+        "hospitalAdvanceAmountInAED": "22000",
+        "transactionType": "1",
+        "careeverServiceChargePercent": "5",
+        "facilitatorServiceChargePercent": "10",
+        "caseManagementFee": "25000",
+        "caseManagementFeeInAed": "1100",
+        "advanceAmountPayableToFacilitator": "100000",
+        "facilitatorAdvanceAmountInAED": "4400",
+        "facilitatorPaymentCreditPeriod": "15"
+      },
+      "attachments": {
+        "filePaths": ["test-files/sample.pdf"]
+      },
+      "tags": ["@regular"]
+    }
+  },
+  "facilitatorFeeTypes": {
+    "TYPE1_MARGIN_SHARING": 1,
+    "TYPE2_CASE_MANAGEMENT_AND_MARGIN": 2,
+    "TYPE3_CASE_MANAGEMENT_ONLY": 3
+  },
+  "waits": {
+    "defaultTimeout": 30000,
+    "shortWait": 5000,
+    "mediumWait": 10000,
+    "longWait": 20000
+  },
+  "errorMessages": {
+    "loginFailure": "Invalid credentials or login failed",
+    "estimationNotSaved": "Estimation failed to save",
+    "modalNotFound": "Enquiry modal did not open",
+    "tabNotFound": "Tab navigation failed",
+    "calculationMismatch": "Estimation calculation does not match expected total"
+  }
+    
+}

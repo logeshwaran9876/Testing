@@ -1,0 +1,259 @@
+========================
+tests/AdminbroadCasting.spec.ts
+Title: Admin HCT Enquiry - Complete Test Suite
+Pages: LoginPage, AdminEnquiryPage
+
+Describes:
+  * Search & Filter Tests
+    - Admin searches case by Patient Name
+    - Admin searches with invalid Case ID shows no results
+    - Admin filters by multiple statuses sequentially
+    - Admin clears search and verifies all cases shown
+    - Admin filters cases by " Estimation Pending\ status
+ - Admin searches with empty search field
+ - Admin searches case by valid Case ID
+ - Admin filters cases by \New\ status
+ - Admin combines search and filter together
+ * Case Details Offcanvas Tests
+ - Admin clicks case row and opens offcanvas
+ - Admin closes offcanvas with Close button
+ - Admin closes offcanvas by clicking outside
+ - Admin verifies case ID matches in offcanvas
+ - Admin opens multiple cases sequentially
+ - Admin verifies patient details in offcanvas
+ * Single Provider Broadcast Tests
+ - Admin broadcasts single provider to New case
+ - Admin broadcasts single provider with country filter
+ - Admin broadcasts single provider with country filter with state
+ - Admin broadcasts provider that already exists in case
+ - Admin searches non-existent provider and verifies no results
+ - Admin searches with random string and handles gracefully
+ - Admin cannot broadcast without selecting any checkbox
+ - Admin searches with special characters in provider name
+ - Admin broadcasts provider with very long name
+ * Multiple Providers Broadcast Tests
+ - Admin selects and then deselects providers before broadcast
+ - Admin selects providers, closes modal, and reopens to verify selection cleared
+ - Admin broadcasts providers with country filter
+ - Admin selects maximum 10 providers and broadcasts
+ * Single Facilitator Broadcast Tests
+ - Admin broadcasts single facilitator to New case
+ - Admin broadcasts facilitator with exact name match
+ - Admin broadcasts facilitator with partial name
+ - Admin broadcasts facilitator that doesn't exist
+ - Admin broadcasts facilitator without typing full name
+ - Admin clears facilitator selection and reselects
+ - Admin broadcasts facilitator with providers
+ * Multiple Facilitators Broadcast Tests
+ - Admin broadcasts facilitators in same session
+ - Admin broadcasts maximum number of facilitators
+ - Admin broadcasts multiple facilitators with providers
+ - Admin broadcasts facilitators with different providers
+ - Admin broadcasts multiple facilitators sequentially
+ * Combination Tests (Facilitator + Provider)
+ - Admin broadcasts loop of facilitator-provider pairs
+ - Admin broadcasts multiple facilitators with single provider
+ - Admin broadcasts facilitator and provider together
+ - Admin broadcasts facilitator with multiple providers
+ - Admin broadcasts multiple facilitators with multiple providers
+ * Country & State Filter Tests
+ - Admin changes country filter and verifies provider results update
+ - Admin clears country filter
+ - Admin selects country then state combination
+ - Admin selects India country filter
+ - Admin changes state filter and verifies provider results
+ - Admin clears state filter
+ * Modal & UI Interaction Tests
+ - Admin opens Add Provider modal
+ - Admin closes Add Provider modal with Close button
+ - Admin closes Add Provider modal with Escape key
+ - Admin closes modal by clicking outside
+ - Admin reopens modal multiple times
+ - Admin verifies modal resets when reopened
+ - Admin searches provider with partial name
+ - Admin searches with empty search field
+ - Admin searches, clears, and searches again
+ - Admin sorts search results by different columns
+ * Additional standalone tests
+ - Admin searches a New case and broadcasts a Multiple provider
+ - Admin searches a New case and broadcasts Facilitator with Providers
+ - Admin searches a New case and broadcasts a Facilitator
+
+========================
+tests/HCTFilersAndTables.spec.ts
+Title: Admin HCT - Complete Test Suite
+Pages: LoginPage, AdminEnquiryPage
+
+Describes mirror the Admin HCT Enquiry suite with equivalent Search & Filter plus Case Details Offcanvas tests.
+
+========================
+tests/HCT.spec.ts
+Title: Broadcast single provider to new case - All Roles
+Pages: LoginPage, HCTpage, AdminEnquiryPage
+
+Describes:
+ * Broadcast single provider to new case - All Roles
+ - Broadcast provider as admin
+ - Broadcast provider as insurance
+ - Broadcast provider as facilitator
+ - Broadcast provider as provider
+ - Broadcast provider as pcmExecutive
+ - Broadcast provider as crmExecutive
+ - Broadcast provider as financeLead1
+ - Broadcast provider as hnmExecutive
+ - Broadcast provider as pcmLead1
+ - Broadcast provider as hnmLead
+
+Notes: Commented-out flows include TC-Insurance new enquiry and role-specific \Check the New Enquiry button\ loop.
+
+========================
+tests/newEnquiry.spec.ts
+Title: Insurance Dashboard - New Inquiry Creation with MCP
+Pages: LoginPage, NewEnquiryPage
+
+Describes and tests:
+ * Duplicate Member History Tests (search with existing member ID, status badge display, case selection, case ID table)
+ * New Inquiry Modal Tests (button visibility, cancel/outside close, reset after reopen)
+ * Member ID Field Tests (validation for valid, special character, short, long, paste, Enter trigger)
+ * Member Search Tests (valid member ID loads form, loader shown)
+ * MCP Auto Form Fill Tests (all mapped fields, dropdown handling, null-safe, partial data)
+ * Form Field Validation Tests (required field errors, max length, special character, Unicode, numeric letters rejection, negative numbers, decimal handling, invalid options, debug validations)
+ * Case Type Scenarios (Regular hides maternity fields, maternity selection, regular selection)
+
+========================
+tests/login.spec.ts
+Title: Multi-Role User Authentication for Healthcare Platform
+Pages: LoginPage
+Roles: admin, insurance, provider, facilitator
+
+Describes and tests:
+ * Successful email login (one test per role)
+ * Successful mobile login (one per role)
+ * Invalid email format (with/out password) + invalid email/password scenarios (one per role each)
+ * Invalid mobile, invalid password, and completely invalid credentials (each per role)
+ * Security & Edge Cases
+ - Password field character masking (per role)
+ - Direct dashboard access without authentication (per role)
+ * UI/UX & Accessibility
+ - TC-LOGIN-031 through TC-LOGIN-035 covering focus, tab navigation, and responsive layouts
+
+========================
+tests/CreateEstimation.spec.ts
+Title: Provider Estimation Management
+Pages: LoginPage, CreateEstimationPage
+
+Tests:
+ - @regular - TC-EST-001: Create estimation for Regular case
+ - @maternity - TC-EST-002: Create estimation for Maternity case
+ - @regular - TC-EST-003: Create complete estimation with all fields
+ - @regular - TC-EST-005: Create multiple estimations for same case
+ - @maternity - TC-EST-008: Create estimation with different case ID
+ - @regular - TC-EST-009: Open and edit first estimation card
+ - @regular - TC-EST-010: Refresh page after saving estimation
+ - @regular - TC-EST-011: Verify estimation cards count
+ - @regular - TC-EST-012: Open enquiry by patient name
+
+========================
+tests/CreateEstimationByFesi.spec.ts
+Title: Provider Estimation Management (Fesi credentials)
+Pages: LoginPage, CreateEstimationPage
+
+Notes: Same TC-EST titles as the above spec but executed with the alternate credentials1 set and provider-specific navigation.
+
+========================
+tests/AproveEstimation.spec.ts
+Title: Approve HCT Enquiry
+Pages: LoginPage, ApproveCasePage
+
+Tests:
+ - Admin REGULAR CASE Admin approves the best card
+ - Admin Metanity CASE Admin approves the best card
+ - Insurence Can REGULAR CASE Admin approves the best card
+ - Insurence Can Metanity CASE Admin approves the best card
+ - Admin compares top 2 estimations
+ - Admin compares top 3 estimations
+ - Insurence compares top 2 estimations
+ - Insurence compares top 3 estimations
+
+========================
+tests/FesilitaterBrodcasting.spec.ts
+Title: Fesitater Brodcasting to provider
+Pages: LoginPage, AdminEnquiryPage
+
+Tests:
+ - TC-BROADCAST-001: Verify Facilitator searches a New case and broadcasts to a single provider
+ - TC-BROADCAST-002: Verify Facilitator searches a New case and broadcasts to multiple providers
+ - Fesilater searches a New case and broadcasts a provider
+ - Fesilater searches a New case and broadcasts multiple provider
+ - TC-BROADCAST-007: Verify Facilitator searches with non-existent provider shows no results
+ - TC-BROADCAST-008: Verify Facilitator cannot broadcast without selecting provider
+ - TC-BROADCAST-006: Verify Facilitator broadcasts to a single facilitator
+ - TC-BROADCAST-003: Verify Facilitator broadcasts provider with country filter
+ - TC-BROADCAST-005: Verify Facilitator broadcasts provider with country and state filters
+
+========================
+tests/GopApprove.spec.ts
+Title: GOP Approve Tests
+Pages: LoginPage, GopPage, GopEditModal
+
+Tests:
+ - Approve GOP from Pending tab as Admin
+ - Approve GOP from Pending tab as Facilitator
+ - Approve GOP from Pending tab as Insurence
+ - Approve GOP from Pending tab as Admin Complte Form Data
+ - Approve GOP from Pending tab as Facilitator Complte Form Data
+ - Approve GOP from Pending tab as Insurence Complte Form Data
+
+========================
+tests/pcm.spec.ts
+Title: PCM Module - New PCM Flow
+Pages: LoginPage, PCMPage
+
+Tests:
+ - TC-PCM-004: Process IPD to Discharge Initaited Move
+Notes: TC-PCM-001 through TC-PCM-003 remain commented out in this file.
+
+========================
+tests/temp.spec.ts
+Title: temp (utility + broadcast scenarios)
+Pages/helpers referenced: enquiryPage, enquiryData
+
+Describes:
+ * Form Submission Tests (valid submission, missing fields, double-click prevention)
+ * Duplicate Submission Tests (same member twice)
+ * Data Persistence Tests (refresh retains data, navigation warning)
+ * MCP Edge Cases (malformed JSON, empty object, unexpected fields)
+ * Performance Tests (page load <3s, form fill <2s, search SLA)
+ * Security Tests (script/HTML injection, SQL-like payload)
+ * Browser Behavior Tests (refresh mid form, back button)
+ * Responsive Tests (small screen modal, keyboard navigation)
+ * Accessibility Tests (tab navigation, label associations, ARIA roles)
+ * Error Handling Tests (backend 500 error)
+ * Broadcast scenarios (TC-BROADCAST-003 through TC-BROADCAST-013 covering facilitator/provider variations, failure cases, country/state filters, and multicast scenarios)
+Notes: The early describe blocks repeat later in the file verbatim.
+
+========================
+tests/dummy.spec.ts
+Title: dummy (placeholder)
+
+Commented-out tests only (placeholders):
+ - TC-ADMIN-002: Admin can add SMO to a case
+ - TC-ADMIN-003: Admin can edit patient details
+ - TC-ADMIN-004: Admin can raise query on a case
+ - TC-ADMIN-005: Admin can edit patient preferences
+ - TC-ADMIN-006: Admin can approve estimations
+ - TC-ADMIN-007: Admin can view estimation details
+ - TC-ADMIN-008: Admin can edit existing estimation
+ - TC-ADMIN-009: Admin can compare multiple estimations
+ - TC-ADMIN-010: Admin can view Hospital/Facilitator terms
+ - TC-ADMIN-011: Admin can upload and view attachments
+ - TC-ADMIN-012: Admin can show estimation to Insurance
+ - TC-ADMIN-013: Admin can add collaborator to case
+ - TC-ADMIN-014: Admin can remove collaborator from case
+ - TC-ADMIN-015: Admin can view all dashboard tabs
+ - TC-ADMIN-016: Admin can filter cases by status
+ - TC-ADMIN-017: Admin can search cases by multiple criteria
+ - TC-ADMIN-018: Admin can export case data
+ - TC-ADMIN-019: Admin can view audit logs
+ - TC-ADMIN-020: Admin can manage user permissions
+ - TC-ADMIN-021: Admin can reassign cases

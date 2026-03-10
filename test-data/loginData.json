@@ -1,0 +1,93 @@
+{
+  "roles": {
+  
+    "provider": {
+      "url": "http://newpro.dev.mycareever.com/auth/signin",
+      "email": "logeshvaran.9876@gmail.com",
+      "password": "Test@123",
+      "caseId": "CS1736",
+      "collaborators": {
+        "existingUser": "Abinaya PCMExecutive - PCMLead",
+        "partialSearch": "Abinaya",
+        "multipleUsers": ["Ashok", "Chandra"],
+        "nonExistentUser": "ThisUserDoesNotExist123!@#",
+        "searchTerms": {
+          "exact": "Abinaya PCMExecutive - PCMLead",
+          "partial": "Abinaya",
+          "firstCharacter": "A"
+        }
+      },
+      "collaboratorPermissions": {
+        "add": false,
+        "search": false,
+        "remove": false,
+        "view": true
+      },
+      "estimation": {
+        "canCreate": true,
+        "canEdit": true,
+        "canView": true,
+        "canCompare": true,
+        "canApprove": false,
+        "regularCaseId": "CS1766",
+        "maternityCaseId": "CS1766",
+        "estimationAmount": "60000",
+        "treatmentPlan": "Provider treatment protocol",
+        "lengthOfStay": "7",
+        "inclusions": "Provider specific inclusions",
+        "exclusions": "Provider specific exclusions"
+      },
+      "providerBroadcast": {
+        "canBroadcast": false,
+        "testCaseId": "CS1736",
+        "providerName": "Leo",
+        "countryName": "India",
+        "stateName": "Tamil Nadu",
+        "nonExistentProvider": "NonExistentProvider123456",
+        "specialCharName": "RESTSRT@Provider#152",
+        "longNameLength": 100,
+        "searchVariations": ["Leo", "leo", "LEO"]
+      },
+      "editPatientPreference": {
+        "preferredCountry": "India",
+        "preferredState": "Maharashtra",
+        "preferredCity": "Mumbai",
+        "preferredProvider": "Apollo Hospital, Mumbai",
+        "memberId": "MEM123456789",
+        "icdProcedure": "ICD-10-CM I10",
+        "eligibilityRoom": "Private Room",
+        "additionalNotes": "Patient prefers morning appointments. Updated preferences."
+      },
+      "editPatient": {
+        "firstName": "John",
+        "lastName": "Smith",
+        "age": "35",
+        "gender": "Male",
+        "bloodGroup": "O+",
+        "height": "175cm",
+        "weight": "75kg",
+        "city": "Mumbai",
+        "phoneNumber": "9876543210",
+        "emergencyContact": "9876543211",
+        "email": "john.smith@email.com",
+        "address": "123 Main Street, Mumbai",
+        "country": "India",
+        "state": "Bihar"
+      },
+      "counseling": {
+        "coPayTerms": "10% co-pay applicable",
+        "additionalNotes": "Patient requires special consideration for co-pay"
+      },
+      "permissions": [
+        "editEstimation",
+        "hospitalFacilitatorTerms",
+        "attachments",
+        "tabsNew",
+        "tabsActive",
+        "tabsApproved",
+        "tabsRejected",
+        "cardViewUI"
+      ]
+    }
+  }
+}
