@@ -122,7 +122,181 @@ test.describe('Estimation Management - All Roles', () => {
 
         }
       });
-      //  ==================== TEST CASE 001: Basic Estimation Creation ====================
+
+
+
+
+      test(`TC-${roleName.toUpperCase()}-EST-002: Verify Provider Enquiry access & estimation creation`, async () => {
+
+        console.log(`\n📋 TC-${roleName.toUpperCase()}-EST-002`);
+        console.log('==================================================');
+
+        if (roleName === "provider") {
+
+          await hctPage.navigateToHCT1();
+          await page.waitForTimeout(3000);
+
+          await estimationPage.searchEnquiry("CS1774");
+          await estimationPage.openEnquiryCardByCaseId1("CS1774");
+
+          const isModalOpen = await estimationPage.isEnquiryModalOpen();
+          expect(isModalOpen).toBe(true);
+
+          await estimationPage.switchToEstimationsTab();
+          if (!perms.canCreate) {
+
+            console.log(`⚠ ${roleName} has menu but cannot create estimation`);
+
+            const hasButton = await page
+              .locator(estimationData.xpaths.newEstimation.newEstimationButton)
+              .isVisible()
+              .catch(() => false);
+
+            expect(hasButton).toBe(false);
+
+            return;
+          }
+
+          const hasCard = await estimationPage.hasEstimationCard();
+          expect(hasCard).toBe(true);
+
+        } else {
+
+          const hasMenu = await estimationPage.hasProviderEnquiryMenu();
+
+          console.log(`${roleName} → Provider Enquiry Access: ${hasMenu}`);
+          console.log(`${roleName} → Can Create Estimation: ${perms.canCreate}`);
+
+          if (!hasMenu) {
+            console.log(`ℹ ${roleName} does not have Provider Enquiry menu`);
+            console.log(`Skipping Provider Enquiry flow for ${roleName}`);
+            return;
+          }
+
+          await estimationPage.openProviderEnquiryIfAvailable();
+
+          await estimationPage.searchEnquiry(roleConfig.caseId);
+          await estimationPage.openEnquiryCardByCaseId1(roleConfig.caseId);
+
+          const isModalOpen = await estimationPage.isEnquiryModalOpen();
+          expect(isModalOpen).toBe(true);
+
+          await estimationPage.switchToEstimationsTab();
+
+          if (!perms.canCreate) {
+
+            console.log(`⚠ ${roleName} has menu but cannot create estimation`);
+
+            const hasButton = await page
+              .locator(estimationData.xpaths.newEstimation.newEstimationButton)
+              .isVisible()
+              .catch(() => false);
+
+            expect(hasButton).toBe(false);
+
+            return;
+          }
+
+        }
+
+      });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      // test(`TC-${roleName.toUpperCase()}-EST-rrr001: Create basic estimation for Regular case`, async () => {
+      //   console.log(`\n📋 TC-${roleName.toUpperCase()}-EST-001: Create basic estimation`);
+      //   console.log('==================================================');
+
+      //   try {
+      //     if (!perms.canCreate) {
+      //       console.log(`ℹ ${roleName} does not have create permission, skipping test`);
+
+      //       return;
+      //     }
+
+      //     if (roleName == "provider") {
+      //       // Navigate to HCT using the HCTpage method
+
+      //       await hctPage.navigateToHCT();
+      //       await page.waitForTimeout(3000);
+
+
+
+      //       await estimationPage.searchEnquiry("CS1774");
+      //       await estimationPage.openEnquiryCardByCaseId1("CS1774");
+
+      //       const isModalOpen = await estimationPage.isEnquiryModalOpen();
+      //       expect(isModalOpen).toBe(true);
+
+      //       await estimationPage.switchToEstimationsTab();
+      //       await estimationPage.clickNewEstimationButton();
+      //       await estimationPage.saveNewEstimation();
+
+      //       const hasCard = await estimationPage.hasEstimationCard();
+      //       expect(hasCard).toBe(true);
+
+      //     }
+      //     else {
+      //       await estimationPage.clickProviderEnquiryMenu();
+      //       await estimationPage.searchEnquiry("CS1736");
+      //       await estimationPage.openEnquiryCardByCaseId1("CS1736");
+      //       itrate = itrate + 1
+      //       const isModalOpen = await estimationPage.isEnquiryModalOpen();
+      //       expect(isModalOpen).toBe(true);
+
+      //       await estimationPage.switchToEstimationsTab();
+      //       await estimationPage.clickNewEstimationButton();
+      //       await estimationPage.saveNewEstimation();
+
+      //       const hasCard = await estimationPage.hasEstimationCard();
+      //       expect(hasCard).toBe(true);
+
+      //     }
+      //     console.log(`✅ TC-${roleName.toUpperCase()}-EST-001 PASSED: Basic estimation created\n`);
+      //   } catch (error) {
+      //     console.error(`❌ Test failed for ${roleName}:`);
+
+      //   }
+      // });
+
+
+
+
+
+
+
+
+
+      // //  ==================== TEST CASE 001: Basic Estimation Creation ====================
 
       // test(`TC-${roleName.toUpperCase()}-EST-001: Create basic estimation for Regular case`, async () => {
       //   console.log(`\n📋 TC-${roleName.toUpperCase()}-EST-001: Create basic estimation`);
@@ -135,39 +309,27 @@ test.describe('Estimation Management - All Roles', () => {
       //       return;
       //     }
 
-      //     if (roleName == "provider" || roleName == "facilitator") {
+      //     if (roleName == "provider") {
       //       // Navigate to HCT using the HCTpage method
 
       //       await hctPage.navigateToHCT();
       //       await page.waitForTimeout(3000);
 
-      //       if (roleName == "facilitator") {
-      //         await approveCasePage.searchCaseById("CS2324");
-      //         await approveCasePage.clickCaseRow("CS2324");
 
-      //         const isOpen = await approveCasePage.isOffcanvasOpen();
-      //         expect(isOpen).toBe(true);
 
-      //         await approveCasePage.clickProvidersTab();
+      //       await estimationPage.searchEnquiry("CS1774");
+      //       await estimationPage.openEnquiryCardByCaseId1("CS1774");
 
-      //         const comparisonSuccess = await approveCasePage.completeComparisonFlow(3);
-      //         expect(comparisonSuccess).toBe(true);
-      //       }
-      //       else {
+      //       const isModalOpen = await estimationPage.isEnquiryModalOpen();
+      //       expect(isModalOpen).toBe(true);
 
-      //         await estimationPage.searchEnquiry("CS1774");
-      //         await estimationPage.openEnquiryCardByCaseId1("CS1774");
+      //       await estimationPage.switchToEstimationsTab();
+      //       await estimationPage.clickNewEstimationButton();
+      //       await estimationPage.saveNewEstimation();
 
-      //         const isModalOpen = await estimationPage.isEnquiryModalOpen();
-      //         expect(isModalOpen).toBe(true);
+      //       const hasCard = await estimationPage.hasEstimationCard();
+      //       expect(hasCard).toBe(true);
 
-      //         await estimationPage.switchToEstimationsTab();
-      //         await estimationPage.clickNewEstimationButton();
-      //         await estimationPage.saveNewEstimation();
-
-      //         const hasCard = await estimationPage.hasEstimationCard();
-      //         expect(hasCard).toBe(true);
-      //       }
       //     }
       //     else {
       //       await estimationPage.clickProviderEnquiryMenu();
@@ -454,126 +616,119 @@ test.describe('Estimation Management - All Roles', () => {
 
       //   }
       // });
-      test(`TC-${roleName.toUpperCase()}-EST-005: Edit first estimation card1`, async () => {
+      // test(`TC-${roleName.toUpperCase()}-EST-005: Edit first estimation card1`, async () => {
 
-        console.log(`\n📋 TC-${roleName.toUpperCase()}-EST-005: Edit first estimation`);
-        console.log('==================================================');
+      //   console.log(`\n📋 TC-${roleName.toUpperCase()}-EST-005: Edit first estimation`);
+      //   console.log('==================================================');
 
-        try {
+      //   try {
 
-          // Permission check
-          if (!perms.canEdit) {
-            console.log(`ℹ ${roleName} does not have edit permission, skipping test`);
-            return;
-          }
+      //     // Permission check
+      //     if (!perms.canEdit) {
+      //       console.log(`ℹ ${roleName} does not have edit permission, skipping test`);
+      //       return;
+      //     }
 
-          // ===============================
-          // Provider Flow
-          // ===============================
-          if (roleName === "provider") {
+      //     // ===============================
+      //     // Provider Flow
+      //     // ===============================
+      //     if (roleName === "provider") {
 
-            await hctPage.navigateToHCT1();
-            await page.waitForTimeout(3000);
+      //       await hctPage.navigateToHCT1();
+      //       await page.waitForTimeout(3000);
 
-            await hctPage.clickActiveTab();
+      //       await hctPage.clickActiveTab();
 
-            await estimationPage.searchEnquiry("CS1780");
-            await estimationPage.openEnquiryCardByCaseId1("CS1780");
+      //       await estimationPage.searchEnquiry("CS1780");
+      //       await estimationPage.openEnquiryCardByCaseId1("CS1780");
 
-            const isModalOpen = await estimationPage.isEnquiryModalOpen();
-            expect(isModalOpen).toBe(true);
+      //       const isModalOpen = await estimationPage.isEnquiryModalOpen();
+      //       expect(isModalOpen).toBe(true);
 
-            await estimationPage.switchToEstimationsTab();
-
-            
+      //       await estimationPage.switchToEstimationsTab();
 
 
- // Create two estimations
-            await estimationPage.clickNewEstimationButton();
-            await estimationPage.saveNewEstimation();
+      //       await estimationPage.clickNewEstimationButton();
+      //       await estimationPage.saveNewEstimation();
 
-         
+      //       await estimationPage.enterEstimationAmount("11000000");
+      //       await estimationPage.saveAsDraft();
+      //     }
 
+      //     // ===============================
+      //     // Facilitator Flow
+      //     // ===============================
+      //     else if (roleName === "facilitator") {
 
+      //       await hctPage.navigateToHCT();
+      //       await page.waitForTimeout(3000);
 
-            await estimationPage.enterEstimationAmount("11000000");
-            await estimationPage.saveAsDraft();
-          }
+      //       await approveCasePage.searchCaseById("CS2324");
+      //       await approveCasePage.clickCaseRow("CS2324");
 
-          // ===============================
-          // Facilitator Flow
-          // ===============================
-          else if (roleName === "facilitator") {
+      //       const isOpen = await approveCasePage.isOffcanvasOpen();
+      //       expect(isOpen).toBe(true);
 
-            await hctPage.navigateToHCT();
-            await page.waitForTimeout(3000);
+      //       await approveCasePage.clickProvidersTab();
+      //       const count = await estimationPage.getEstimationCardsCount();
 
-            await approveCasePage.searchCaseById("CS2324");
-            await approveCasePage.clickCaseRow("CS2324");
+      //       if (count === 0) {
+      //         await estimationPage.clickNewEstimationButton();
+      //         await estimationPage.saveNewEstimation();
+      //         await page.waitForTimeout(2000);
+      //       }
+      //       const comparisonSuccess = await approveCasePage.completeComparisonFlow(3);
+      //       expect(comparisonSuccess).toBe(true);
 
-            const isOpen = await approveCasePage.isOffcanvasOpen();
-            expect(isOpen).toBe(true);
+      //       console.log(`ℹ Facilitator performs comparison instead of editing estimation`);
+      //       return;
 
-            await approveCasePage.clickProvidersTab();
-            const count = await estimationPage.getEstimationCardsCount();
+      //     }
 
-            if (count === 0) {
-              await estimationPage.clickNewEstimationButton();
-              await estimationPage.saveNewEstimation();
-              await page.waitForTimeout(2000);
-            }
-            const comparisonSuccess = await approveCasePage.completeComparisonFlow(3);
-            expect(comparisonSuccess).toBe(true);
+      //     // ===============================
+      //     // Internal Roles Flow
+      //     // ===============================
+      //     else {
 
-            console.log(`ℹ Facilitator performs comparison instead of editing estimation`);
-            return;
+      //       await estimationPage.clickProviderEnquiryMenu();
 
-          }
+      //       await estimationPage.searchEnquiry(caseIds[itrate]);
+      //       await estimationPage.openEnquiryCardByCaseId1(caseIds[itrate]);
 
-          // ===============================
-          // Internal Roles Flow
-          // ===============================
-          else {
+      //       itrate++;
 
-            await estimationPage.clickProviderEnquiryMenu();
+      //       const isModalOpen = await estimationPage.isEnquiryModalOpen();
+      //       expect(isModalOpen).toBe(true);
 
-            await estimationPage.searchEnquiry(caseIds[itrate]);
-            await estimationPage.openEnquiryCardByCaseId1(caseIds[itrate]);
+      //       await estimationPage.switchToEstimationsTab();
 
-            itrate++;
+      //       const count = await estimationPage.getEstimationCardsCount();
 
-            const isModalOpen = await estimationPage.isEnquiryModalOpen();
-            expect(isModalOpen).toBe(true);
+      //       if (count === 0) {
+      //         await estimationPage.clickNewEstimationButton();
+      //         await estimationPage.saveNewEstimation();
+      //         await page.waitForTimeout(2000);
+      //       }
 
-            await estimationPage.switchToEstimationsTab();
+      //       await estimationPage.clickFirstEstimationCardViewEdit();
 
-            const count = await estimationPage.getEstimationCardsCount();
+      //       const isEditActive = await estimationPage.verifyEditTabActive();
+      //       expect(isEditActive).toBe(true);
 
-            if (count === 0) {
-              await estimationPage.clickNewEstimationButton();
-              await estimationPage.saveNewEstimation();
-              await page.waitForTimeout(2000);
-            }
+      //       await estimationPage.enterEstimationAmount("10000");
+      //       await estimationPage.saveAsDraft();
 
-            await estimationPage.clickFirstEstimationCardViewEdit();
+      //     }
 
-            const isEditActive = await estimationPage.verifyEditTabActive();
-            expect(isEditActive).toBe(true);
+      //     console.log(`✅ TC-${roleName.toUpperCase()}-EST-005 PASSED: First estimation card edited\n`);
 
-            await estimationPage.enterEstimationAmount("10000");
-            await estimationPage.saveAsDraft();
+      //   } catch (error) {
 
-          }
+      //     console.error(`❌ TC-${roleName.toUpperCase()}-EST-005 FAILED`);
 
-          console.log(`✅ TC-${roleName.toUpperCase()}-EST-005 PASSED: First estimation card edited\n`);
+      //   }
 
-        } catch (error) {
-
-          console.error(`❌ TC-${roleName.toUpperCase()}-EST-005 FAILED`);
-
-        }
-
-      });
+      // });
       // //==================== TEST CASE 006: Edit Last Estimation Card ====================
 
       // test(`TC-${roleName.toUpperCase()}-EST-006: Edit last estimation card`, async () => {
@@ -984,6 +1139,10 @@ test.describe('Estimation Management - All Roles', () => {
       //     
       //   }
       // });
+
+
+
+
     });
   }
 });

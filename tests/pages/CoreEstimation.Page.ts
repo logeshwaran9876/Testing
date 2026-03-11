@@ -76,29 +76,98 @@ export class CreateEstimationPage {
       throw error;
     }
   }
+  async hasProviderEnquiryMenu(): Promise<boolean> {
+    try {
+      // Strategy 1 — wait for sidebar to load
+      await this.page.waitForSelector('ul.navigation-main', { timeout: 8000 }).catch(() => { });
 
+      // Strategy 2 — check by icon alt
+      const iconLocator = this.page.locator('img[alt="Provider enquiry"]');
+      const iconCount = await iconLocator.count();
+
+      if (iconCount > 0) {
+        const visible = await iconLocator.first().isVisible().catch(() => false);
+        console.log(`🔎 Strategy 1 (icon alt) visible: ${visible}`);
+        if (visible) return true;
+      }
+
+      // Strategy 3 — check parent <li>
+      const liLocator = this.page.locator('li:has(img[alt="Provider enquiry"])');
+      const liCount = await liLocator.count();
+
+      if (liCount > 0) {
+        const visible = await liLocator.first().isVisible().catch(() => false);
+        console.log(`🔎 Strategy 2 (li parent) visible: ${visible}`);
+        if (visible) return true;
+      }
+
+      // Strategy 4 — check by src path
+      const srcLocator = this.page.locator('img[src*="Provider enquiry"]');
+      const srcCount = await srcLocator.count();
+
+      if (srcCount > 0) {
+        const visible = await srcLocator.first().isVisible().catch(() => false);
+        console.log(`🔎 Strategy 3 (src path) visible: ${visible}`);
+        if (visible) return true;
+      }
+
+      // Strategy 5 — check by menu container text fallback
+      const fallbackLocator = this.page.locator('li.nav-item');
+      const fallbackCount = await fallbackLocator.count();
+
+      console.log(`🔎 Strategy 4 (fallback nav items found): ${fallbackCount}`);
+
+      return false;
+
+    } catch (error) {
+      console.log("⚠ Provider enquiry detection failed:", error);
+      return false;
+    }
+  }
   /**
    * Click on Provider enquiry menu and then the sub-menu item in popover
    */
   async clickProviderEnquiryMenu(): Promise<void> {
-    try {
-      console.log('🔍 Looking for Provider enquiry menu...');
-      const mainMenu = this.page.locator('img[alt="Provider enquiry"]').first();
-      await mainMenu.waitFor({ state: 'visible', timeout: 10000 });
-      await mainMenu.click();
-      console.log('✓ Main menu clicked');
+    console.log('🔍 Looking for Provider enquiry menu...');
 
-      const subMenu = this.page.locator('li:has-text("Provider enquiry")').first();
-      await subMenu.waitFor({ state: 'visible', timeout: 10000 });
-      await subMenu.click();
-      console.log('✓ Sub-menu clicked');
-      await this.page.waitForLoadState('networkidle');
-    } catch (error) {
-      console.error('✗ Failed to click Provider enquiry menu:', error);
-      throw error;
-    }
+    const mainMenu = this.page.locator('li:has(img[alt="Provider enquiry"])');
+
+    await mainMenu.waitFor({ state: 'visible', timeout: 10000 });
+
+    await mainMenu.click();
+
+    console.log('✓ Provider enquiry menu clicked');
+
+    const subMenu = this.page.locator('li:has-text("Provider enquiry")').first();
+
+    await subMenu.waitFor({ state: 'visible', timeout: 10000 });
+
+    await subMenu.click();
+
+    console.log('✓ Sub menu clicked');
+
+    await this.page.waitForLoadState('networkidle');
   }
+  async openProviderEnquiryIfAvailable(): Promise<boolean> {
+    const hasMenu = await this.hasProviderEnquiryMenu();
 
+    if (!hasMenu) {
+      console.log("⚠ Provider enquiry menu not available for this role");
+      return false;
+    }
+
+    console.log("✅ Provider enquiry menu available, opening...");
+
+    const mainMenu = this.page.locator('img[alt="Provider enquiry"]').first();
+    await mainMenu.click();
+
+    const subMenu = this.page.locator('li:has-text("Provider enquiry")').first();
+    await subMenu.click();
+
+    await this.page.waitForLoadState('networkidle');
+
+    return true;
+  }
   /**
    * Search for an enquiry by Case ID
    */
@@ -427,6 +496,7 @@ export class CreateEstimationPage {
       throw error;
     }
   }
+
 
   /**
    * Fill treatment plan
